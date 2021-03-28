@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class ClientPage extends BasePage {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientPage.class);
-    private static final String URL = "/users";
+    private static final String URL = "/clients/manage";
 
 
     public void navigateTo(){
