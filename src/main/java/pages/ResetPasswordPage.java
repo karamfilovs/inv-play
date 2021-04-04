@@ -24,4 +24,16 @@ public class ResetPasswordPage extends BasePage {
         return this;
     }
 
+    public String getResetSuccessMessage(){
+        LOGGER.info("Retrieving success reset message");
+        return getText("//div[@class='alert selenium-message alert-success sticky']");
+    }
+
+
+    public String getResetFailMessage(){
+        LOGGER.info("Retrieving success reset message");
+        return getText("//div[@class='alert selenium-message alert-danger sticky']");
+    }
+
+
 }

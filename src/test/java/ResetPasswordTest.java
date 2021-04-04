@@ -6,16 +6,17 @@ import pages.Defaults;
 
 public class ResetPasswordTest extends TestSetup {
 
-    private final String SUCCESS_RESET_MESSAGE = "If you filled in the correct details an e-mail was sent to you. Please read it carefully and follow the instructions!";
+    private final String SUCCESS_RESET_MESSAGE = "На e-mail адреса Ви беше изпратен линк, чрез който можете да смените паролата си.";
+    private final String FAILED_RESET_MESSAGE = "Грешно потребителско име или e-mail адрес. Моля, опитайте отново.";
 
     @Test
     @DisplayName("Can reset password with valid email")
     public void canResetPasswordWithValidEmail() {
         app.loginPage.pressResetPasswordLink();
         Assertions.assertEquals("Възстановяване на парола", app.resetPasswordPage.getH4Text());
-        app.resetPasswordPage
-                .populateEmail(Defaults.EMAIL)
+        app.resetPasswordPage.populateEmail(Defaults.EMAIL)
                 .pressSendButton();
+        Assertions.assertEquals(SUCCESS_RESET_MESSAGE, app.resetPasswordPage.getResetSuccessMessage());
     }
 
     @Test
@@ -25,6 +26,6 @@ public class ResetPasswordTest extends TestSetup {
         Assertions.assertEquals("Възстановяване на парола", app.resetPasswordPage.getH4Text());
         app.resetPasswordPage.populateEmail("alex@pragma.bg")
                 .pressSendButton();
-        Assertions.assertTrue(app.resetPasswordPage.getGenericSuccess().contains(SUCCESS_RESET_MESSAGE));
+        Assertions.assertEquals(FAILED_RESET_MESSAGE, app.resetPasswordPage.getResetFailMessage());
     }
 }

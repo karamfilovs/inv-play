@@ -1,8 +1,11 @@
 package pages;
 
 import com.microsoft.playwright.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BasePage {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
     protected Page page;
 
     public String getH1Text() {
@@ -42,14 +45,18 @@ public class BasePage {
     }
 
     protected String getText(String selector) {
-        return page.textContent(selector).trim();
+        String text = page.textContent(selector).replace("\u00a0", "").trim();
+        LOGGER.info("Text found is:" + text);
+        return text;
     }
 
     public String getGenericError() {
+        LOGGER.info("Retrieving failure message");
         return getText("#error");
     }
 
     public String getGenericSuccess() {
+        LOGGER.info("Retrieving success message");
         return getText("#okmsg");
     }
 

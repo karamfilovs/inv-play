@@ -1,29 +1,34 @@
+import api.ClientAPI;
 import base.TestSetup;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 public class ClientPageTest extends TestSetup {
-    private static final String SUCCESS_ADD_MESSAGE = "The data has been saved";
+    private static final String SUCCESS_ADD_MESSAGE = "Клиентът е добавен успешно.";
 
     @Test
     @DisplayName("Can navigate to users page")
     public void canNavigateToUsersPage() {
         app.loginPage.login();
         app.clientPage.navigateTo();
-        Assertions.assertTrue(app.clientPage.getBreadcrumbsText().contains("Users"));
+        Assertions.assertEquals("Клиенти", app.clientPage.getH2Text());
     }
 
     @Test
     @DisplayName("Can create new user with mandatory fields only")
     public void canCreateUserWithMandatoryFields() {
+        ClientAPI.deleteAllClients();
         app.loginPage.login();
         app.clientPage.navigateTo();
         app.clientPage.pressAddButton()
-                .populateFirstName("Test")
-                .populateLastName("User")
+                .populateFirmName("Test Company " + LocalDateTime.now() )
+                .populateFirmAddress("Student District")
+                .populateFirCity("Sofia")
                 .pressSaveButton();
-        Assertions.assertTrue(app.clientPage.getGenericSuccess().contains(SUCCESS_ADD_MESSAGE));
+        Assertions.assertEquals(SUCCESS_ADD_MESSAGE, app.clientPage.getGenericSuccess());
     }
 
 }

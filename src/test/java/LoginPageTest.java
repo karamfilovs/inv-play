@@ -8,7 +8,7 @@ import pages.Defaults;
 public class LoginPageTest extends TestSetup {
     private final String INVALID_CREDENTIALS_ERROR = "Грешно потребителско име или парола. Моля, опитайте отново.";
     private final String BLANK_USER_CREDENTIALS_ERROR = "Моля, попълнете вашия email";
-    private final String LOGOUT_SUCCESS = "Вие излязохте от акаунта си.\n";
+    private final String LOGOUT_SUCCESS = "Вие излязохте от акаунта си.";
 
     @Test
     @DisplayName("Can login with valid credentials")
@@ -22,10 +22,7 @@ public class LoginPageTest extends TestSetup {
     @Test
     @DisplayName("Cant login with blank credentials")
     public void cantLoginWithBlankCredentials() {
-        app.loginPage
-                .populateEmail("")
-                .populatePassword("")
-                .pressLoginButton();
+        app.loginPage.pressLoginButton();
         Assertions.assertEquals(BLANK_USER_CREDENTIALS_ERROR, app.loginPage.getGenericError());
     }
 

@@ -19,24 +19,30 @@ public class ClientPage extends BasePage {
 
     public ClientPage pressAddButton(){
         LOGGER.info("Clicking Add link");
-        click("//i[@class='ace-icon fa fa-plus align-top bigger-125']");
+        click("//a[@class='newbtn selenium-add-client-button']");
         return this;
 
     }   public ClientPage pressSaveButton(){
         LOGGER.info("Clicking Add link");
-        click("//i[@class='ace-icon fa fa-check bigger-110']");
+        click("input[name=do_submit]");
         return this;
     }
 
-    public ClientPage populateFirstName(String firstName){
-        LOGGER.info("Populate first name:" + firstName);
-        typeText("#firstname", firstName);
+    public ClientPage populateFirmName(String firmName){
+        LOGGER.info("Populate firm name:" + firmName);
+        typeText("input[name=firm_name]", firmName);
         return this;
     }
 
-    public ClientPage populateLastName(String lastName){
-        LOGGER.info("Populate last name:" + lastName);
-        typeText("#lastname", lastName);
+    public ClientPage populateFirmAddress(String address){
+        LOGGER.info("Populate firm address:" + address);
+        typeText("textarea[name=firm_addr]", address);
+        return this;
+    }
+
+    public ClientPage populateFirCity(String city){
+        LOGGER.info("Populate firm city:" + city);
+        typeText("input[name=firm_town]", city);
         return this;
     }
 }

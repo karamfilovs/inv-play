@@ -40,7 +40,7 @@ public class TestSetup {
     }
 
     public static void setupChrome() {
-        LOGGER.info("Starting Chrome browser");
+        LOGGER.info("Starting Chrome browser before all tests");
         browser = Playwright.create()
                 .chromium()
                 .launch(new BrowserType.LaunchOptions().setTimeout(10000).setHeadless(headless));
