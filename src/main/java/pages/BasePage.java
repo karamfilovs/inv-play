@@ -1,6 +1,7 @@
 package pages;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,11 @@ public class BasePage {
 
     public String getH2Text() {
         return getText("h2");
+    }
+
+
+    public String getTitle() {
+        return page.title();
     }
 
     public String getH4Text() {
@@ -38,6 +44,8 @@ public class BasePage {
 
     protected void navigateTo(String pageUrl) {
         page.navigate(Defaults.BASE_URL + pageUrl);
+        page.waitForLoadState(LoadState.DOMCONTENTLOADED);
+        page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
     protected void waitForVisibilityOf(String selector) {

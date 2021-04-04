@@ -14,7 +14,7 @@ public class ClientPageTest extends TestSetup {
     public void canNavigateToUsersPage() {
         app.loginPage.login();
         app.clientPage.navigateTo();
-        Assertions.assertEquals("Клиенти", app.clientPage.getH2Text());
+        Assertions.assertEquals("Клиенти - QA Ground", app.clientPage.getTitle());
     }
 
     @Test

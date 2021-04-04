@@ -10,6 +10,7 @@ public class ClientPage extends BasePage {
 
 
     public void navigateTo(){
+        LOGGER.info("Navigating to:" + Defaults.BASE_URL + URL);
         navigateTo(URL);
     }
 
